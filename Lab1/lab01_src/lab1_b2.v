@@ -19,38 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module lab1_b1 (a, b, c, aluctr, d, e);
-    parameter n = 1;
-	input [n-1:0] a, b;
-	input c;
-	input [1:0] aluctr;
-	output reg [n-1:0] d;
-	output reg e;
-	
-	wire comp_e;
-	assign comp_e = (a>b)? 1 : (a<b)? 0 : c;
-	
-    always@(*)begin
-        case(aluctr)
-			2'b00:begin
-				{e, d} = a + b + c;
-			end
-			2'b01:begin
-				d = a&b;
-				e = 0;
-			end
-			2'b10:begin
-				d = 4'b0;
-				e = comp_e;
-			end
-			2'b11:begin
-				d = a^b;
-				e = 0;
-			end
-        endcase
-    end
-endmodule
-
 module lab1_b2 (a, b, c, aluctr, d, e);
 	input [3:0] a,b;
 	input [1:0] aluctr;
@@ -62,9 +30,9 @@ module lab1_b2 (a, b, c, aluctr, d, e);
 	wire e0,e1,e2,e3;
 	
 	lab1_b1 #(4) m0(a, b, c, aluctr, d0, e0);
-	lab1_b1 #(4) m1(a, b, c, aluctr, d1, e1);
-	lab1_b1 #(4) m2(a, b, c, aluctr, d2, e2);
-	lab1_b1 #(4) m3(a, b, c, aluctr, d3, e3);
+	lab1_b1 #(4) m1(a, b, e0, aluctr, d1, e1);
+	lab1_b1 #(4) m2(a, b, e1, aluctr, d2, e2);
+	lab1_b1 #(4) m3(a, b, e2, aluctr, d3, e3);
 	
     always@(*)begin
         case(aluctr)

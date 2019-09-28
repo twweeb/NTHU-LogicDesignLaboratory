@@ -19,32 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module one_bit_alu (a, b, c, aluctr, d, e);
-	input a, b, c;
-	input [1:0] aluctr;
-	output reg d, e;
-	
-    always@(*)begin
-        case(aluctr)
-			2'b00:begin
-				{e, d} = a + b + c;
-			end
-			2'b01:begin
-				d = a&b;
-				e = 0;
-			end
-			2'b10:begin
-				d = !(a|b);
-				e = 0;
-			end
-			2'b11:begin
-				d = a^b;
-				e = 0;
-			end
-        endcase
-    end
-endmodule
-
 module four_bit_adder (d, e, a, b, c);
 	input [3:0] a,b;
 	input c;
@@ -52,10 +26,10 @@ module four_bit_adder (d, e, a, b, c);
 	output e;
 	
 	wire t1, t2, t3;
-	one_bit_alu o1(a[0], b[0], c, 2'b00, d[0], t1);
-	one_bit_alu o2(a[1], b[1], t1, 2'b00, d[1], t2);
-	one_bit_alu o3(a[2], b[2], t2, 2'b00, d[2], t3);
-	one_bit_alu o4(a[3], b[3], t3, 2'b00, d[3], e);
+	lab1_3 o1(a[0], b[0], c, 2'b00, d[0], t1);
+	lab1_3 o2(a[1], b[1], t1, 2'b00, d[1], t2);
+	lab1_3 o3(a[2], b[2], t2, 2'b00, d[2], t3);
+	lab1_3 o4(a[3], b[3], t3, 2'b00, d[3], e);
 endmodule
 
 module four_bit_and (d, e, a, b, c);
@@ -64,10 +38,10 @@ module four_bit_and (d, e, a, b, c);
 	output [3:0] d;
 	output e;
 	
-	one_bit_alu o1(a[0], b[0], c, 2'b01, d[0], e);
-	one_bit_alu o2(a[1], b[1], c, 2'b01, d[1], e);
-	one_bit_alu o3(a[2], b[2], c, 2'b01, d[2], e);
-	one_bit_alu o4(a[3], b[3], c, 2'b01, d[3], e);
+	lab1_3 o1(a[0], b[0], c, 2'b01, d[0], e);
+	lab1_3 o2(a[1], b[1], c, 2'b01, d[1], e);
+	lab1_3 o3(a[2], b[2], c, 2'b01, d[2], e);
+	lab1_3 o4(a[3], b[3], c, 2'b01, d[3], e);
 endmodule
 
 module four_bit_nor (d, e, a, b, c);
@@ -76,10 +50,10 @@ module four_bit_nor (d, e, a, b, c);
 	output [3:0] d;
 	output e;
 	
-	one_bit_alu o1(a[0], b[0], c, 2'b10, d[0], e);
-	one_bit_alu o2(a[1], b[1], c, 2'b10, d[1], e);
-	one_bit_alu o3(a[2], b[2], c, 2'b10, d[2], e);
-	one_bit_alu o4(a[3], b[3], c, 2'b10, d[3], e);
+	lab1_3 o1(a[0], b[0], c, 2'b10, d[0], e);
+	lab1_3 o2(a[1], b[1], c, 2'b10, d[1], e);
+	lab1_3 o3(a[2], b[2], c, 2'b10, d[2], e);
+	lab1_3 o4(a[3], b[3], c, 2'b10, d[3], e);
 endmodule
 
 module four_bit_xor (d, e, a, b, c);
@@ -88,10 +62,10 @@ module four_bit_xor (d, e, a, b, c);
 	output [3:0] d;
 	output e;
 	
-	one_bit_alu o1(a[0], b[0], c, 2'b11, d[0], e);
-	one_bit_alu o2(a[1], b[1], c, 2'b11, d[1], e);
-	one_bit_alu o3(a[2], b[2], c, 2'b11, d[2], e);
-	one_bit_alu o4(a[3], b[3], c, 2'b11, d[3], e);
+	lab1_3 o1(a[0], b[0], c, 2'b11, d[0], e);
+	lab1_3 o2(a[1], b[1], c, 2'b11, d[1], e);
+	lab1_3 o3(a[2], b[2], c, 2'b11, d[2], e);
+	lab1_3 o4(a[3], b[3], c, 2'b11, d[3], e);
 endmodule
 
 module lab1_4 (a, b, c, aluctr, d, e);
