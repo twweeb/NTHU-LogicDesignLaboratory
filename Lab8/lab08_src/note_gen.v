@@ -20,7 +20,7 @@ module note_gen(
     reg [21:0] clk_cnt_next_2, clk_cnt_2;
     reg b_clk, b_clk_next;
     reg c_clk, c_clk_next;
-	reg [15:0] ampH, ampL;
+    reg [15:0] ampH, ampL;
 
     // Note frequency generation
     always @(posedge clk or posedge rst)
@@ -63,33 +63,33 @@ module note_gen(
                 c_clk_next = c_clk;
             end
     always @*
-	    case(volume)
-		    1: begin
-			    ampH <= 16'h0040;
-				ampL <= 16'hFFC0;
-			end
-		    2: begin
-			    ampH <= 16'h00A0;
-				ampL <= 16'hFF60;
-			end
-		    3: begin
-			    ampH <= 16'h0A00;
-				ampL <= 16'hF600;
-			end
-		    4: begin
-			    ampH <= 16'h4000;
-				ampL <= 16'hC000;
-			end
-		    5: begin
-			    ampH <= 16'h7000;
-				ampL <= 16'h9000;
-			end
-		    default: begin
-			    ampH <= 16'h00C0;
-				ampL <= 16'hFFC0;
-			end
-		endcase
-		
+        case(volume)
+            1: begin
+                ampH <= 16'h0040;
+                ampL <= 16'hFFC0;
+            end
+            2: begin
+                ampH <= 16'h00A0;
+                ampL <= 16'hFF60;
+            end
+            3: begin
+                ampH <= 16'h0A00;
+                ampL <= 16'hF600;
+            end
+            4: begin
+                ampH <= 16'h4000;
+                ampL <= 16'hC000;
+            end
+            5: begin
+                ampH <= 16'h7000;
+                ampL <= 16'h9000;
+            end
+            default: begin
+                ampH <= 16'h00C0;
+                ampL <= 16'hFFC0;
+            end
+        endcase
+        
     // Assign the amplitude of the note
     // Volume is controlled here
     assign audio_left = (note_div_left == 22'd1) ? 16'h0000 : (b_clk == 1'b0) ? ampL : ampH;
